@@ -1,20 +1,29 @@
-string: str = "The weather is fine! What is your opinion?"
 
-is_first_index = string.find("is")
-print(is_first_index)
-is_second_index = string.find("is", is_first_index+1)
-print(is_second_index)
+my_str: str = 'Would     you tell me, please, which way t much care where ——" said Alice. ASD. Alice.'
+
+words_my_str: list[str] = my_str.split()
+
+print(words_my_str)
+
+# for word in words_my_str:
+#     print(word)
+
+joined_my_str: str = ''.join(words_my_str)
+
+print(joined_my_str)
 
 
-# sent = 'Would     you tell me, please, which way t much care where ——" said Alice. ASD. Alice.'
-#
-#
-#
-# print(sent.count('l'))
-# list_of_words = sent.split()
-#
-# print(type(list_of_words))
-# print(list_of_words)
+tariffs = '1.2,1.5,1.5,1'
+
+tariffs_list = tariffs.split(",")
+print(tariffs_list)
+
+
+
+
+
+
+
 #
 # # join
 #
