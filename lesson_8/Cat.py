@@ -15,3 +15,9 @@ slavik = Cat(name='Slavik', age=1, bread="siam")
 print(dir(slavik))
 
 slavik.speak()
+
+
+# slavik.ears = 4
+setattr(slavik, "ears", 4)
+
+print(slavik.ears)
