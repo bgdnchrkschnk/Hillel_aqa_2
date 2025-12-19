@@ -45,8 +45,9 @@ class DecoratorUpper:
 
 def decorator_upper_func(func):
     def inner(*args, **kwargs):
-        ...
+        ... # logging.info(args)
         result = func(*args, **kwargs)
+        ... # logging.info(f"Result of func.__name__ - {result})
         result = result.upper()
         ...
         return result
