@@ -1,3 +1,4 @@
+import logging
 import os
 from dotenv import load_dotenv
 import requests
@@ -36,4 +37,5 @@ class BaseAPIClient:
         return self.session.get(url=f"{self.BASE_URL}{endpoint}")
 
     def _post(self, endpoint: str, data: dict) -> Response:
-        return self.session.post(url=f"{self.BASE_URL}{endpoint}", json=data)
+        logging.info(f"Sending request to {self.BASE_URL+endpoint}, data: {data}\nHeaders: {self.session.headers}")
+        return self.session.post(url=f"{self.BASE_URL+endpoint}", json=data)

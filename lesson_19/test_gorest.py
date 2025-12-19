@@ -10,13 +10,12 @@ load_dotenv()
 
 
 class TestGorestAPI:
+    user_api_client = UsersApiClient(api_key=os.getenv("API_TOKEN"))
 
     def test_user_creation(self):
-        user_api_client = UsersApiClient(api_key=os.getenv("API_TOKEN"))
         test_user_data: dict = get_create_user_request()
-        print(test_user_data)
-        response: Response = user_api_client.create_user(test_user_data)
-        response_json = response.text
+        response: Response = self.user_api_client.create_user(test_user_data)
+        response_json = response.json()
         assert response.json().get("id") is not None
 
     def test_getting_user(self):
@@ -26,8 +25,7 @@ class TestGorestAPI:
 
         # GET USER
         response: Response = self.user_api_client.get_user(user_id=user_id)
-        assert test_user_data in response.json()
-
+        assert test_user_data.items() <= response.json().items()
 
 
 
