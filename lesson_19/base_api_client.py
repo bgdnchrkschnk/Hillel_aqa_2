@@ -34,8 +34,13 @@ class BaseAPIClient:
         return self.__api_key
 
     def _get(self, endpoint: str) -> Response:
-        return self.session.get(url=f"{self.BASE_URL}{endpoint}")
+        return self.session.get(url=f"{self.BASE_URL}{endpoint}", timeout=10)
 
     def _post(self, endpoint: str, data: dict) -> Response:
-        logging.info(f"Sending request to {self.BASE_URL+endpoint}, data: {data}\nHeaders: {self.session.headers}")
-        return self.session.post(url=f"{self.BASE_URL+endpoint}", json=data)
+        return self.session.post(url=f"{self.BASE_URL+endpoint}", json=data, timeout=10)
+
+    def _put(self, endpoint: str, data: dict) -> Response:
+        return self.session.put(url=f"{self.BASE_URL+endpoint}", json=data, timeout=10)
+
+    def _delete(self, endpoint: str) -> Response:
+        return self.session.delete(url=f"{self.BASE_URL+endpoint}", timeout=10)
