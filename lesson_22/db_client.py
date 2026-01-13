@@ -59,7 +59,9 @@ class DBClient:
         logging.info("Closing connections...")
         if self.__connection:
             self.__connection.close()
-        if self.cursor.close()
+        if self.cursor.close():
+            self.__cursor.close()
+            logging.info("Cursor closed successfully!")
 
 
 if __name__ == "__main__":
