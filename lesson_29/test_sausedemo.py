@@ -1,6 +1,5 @@
 import os
 
-from playwright.sync_api import sync_playwright
 from dotenv import load_dotenv
 
 from lesson_29.page_objects.home_page.HomePage import HomePage

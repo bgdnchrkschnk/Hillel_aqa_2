@@ -1,3 +1,5 @@
+import os
+
 import pytest
 from playwright.sync_api import sync_playwright
 
@@ -9,9 +11,12 @@ from lesson_29.page_objects.login_page.LoginPage import LoginPage
 def clear_page():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False)
-        page = browser.new_page()
+        context = browser.new_context()
+        page = context.new_page()
         page.set_default_timeout(5000)
         yield page
+        context.close()
+        browser.close()
 
 @pytest.fixture
 def login_page(clear_page) -> LoginPage:
