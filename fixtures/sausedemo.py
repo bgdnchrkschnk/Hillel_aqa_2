@@ -1,0 +1,32 @@
+import pytest
+from playwright.sync_api import sync_playwright
+
+from lesson_29.page_objects.home_page.HomePage import HomePage
+from lesson_29.page_objects.login_page.LoginPage import LoginPage
+
+
+@pytest.fixture
+def clear_page():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=False)
+        page = browser.new_page()
+        page.set_default_timeout(5000)
+        yield page
+
+@pytest.fixture
+def login_page(clear_page) -> LoginPage:
+    loginpage = LoginPage(clear_page)
+    loginpage.open()
+    return loginpage
+
+@pytest.fixture
+def home_page_unlogged(login_page) -> HomePage:
+    homepage = HomePage(login_page.page)
+    return homepage
+
+@pytest.fixture
+def home_page_with_login(login_page) -> HomePage:
+    login_page.do_login(username=os.getenv("STANDARD_USERNAME"), password=os.getenv("STANDARD_USERPW"))
+    homepage = HomePage(login_page.page)
+    homepage.is_logged_in()
+    return homepage

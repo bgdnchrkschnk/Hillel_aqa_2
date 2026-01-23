@@ -14,11 +14,11 @@ class TestExample:
     def sum(self, x, y):
         return x + y
 
-    @pytest.mark.parametrize("test_number", [1, 4, 6, 9])
-    def test_example_randint(self, test_number, api_client):
-        assert test_number % 2 == 0
-
-        requests.get(auth=, params={"sorting_by": "price", })
+    # @pytest.mark.parametrize("test_number", [1, 4, 6, 9])
+    # def test_example_randint(self, test_number, api_client):
+    #     assert test_number % 2 == 0
+    #
+    #     requests.get(auth=, params={"sorting_by": "price", })
 
 
     # @pytest.mark.parametrize("user": ["admin", "moderator", "vip", "regular"])

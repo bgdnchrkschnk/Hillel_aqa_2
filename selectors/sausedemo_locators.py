@@ -1,0 +1,3 @@
+user_name_input = "#user-name"
+password_input = "#password"
+login_button = "#login-button"
