@@ -1,4 +1,5 @@
 import os
+import pathlib
 
 import pytest
 from playwright.sync_api import sync_playwright
@@ -18,19 +19,38 @@ def clear_page():
         context.close()
         browser.close()
 
+
+@pytest.fixture(scope="function", autouse=True)
+def trace_per_test(request, clear_page):
+
+    context = clear_page.context
+
+    trace_path = pathlib.Path(__file__).parent / 'pw_traces'
+    trace_path.mkdir(exist_ok=True)
+
+    # старт трасування
+    context.tracing.start(
+        screenshots=True,
+        snapshots=True,
+        sources=True
+    )
+
+    yield  # тест виконується тут
+
+    # stop tracing і збереження після тесту
+    test_name = request.node.name
+    context.tracing.stop(path=str(trace_path / f"{test_name}.zip"))
+
+
 @pytest.fixture
 def login_page(clear_page) -> LoginPage:
     loginpage = LoginPage(clear_page)
     loginpage.open()
     return loginpage
 
-@pytest.fixture
-def home_page_unlogged(login_page) -> HomePage:
-    homepage = HomePage(login_page.page)
-    return homepage
 
 @pytest.fixture
-def home_page_with_login(login_page) -> HomePage:
+def home_page(login_page) -> HomePage:
     login_page.do_login(username=os.getenv("STANDARD_USERNAME"), password=os.getenv("STANDARD_USERPW"))
     homepage = HomePage(login_page.page)
     homepage.is_logged_in()
