@@ -1,6 +1,9 @@
 import os
 from playwright.sync_api import Page, Locator, expect
 from dotenv import load_dotenv
+
+from lesson_29.page_objects.home_page.HomePage import HomePage
+
 load_dotenv()
 
 class LoginPage:
@@ -27,7 +30,8 @@ class LoginPage:
     def open(self):
         self.page.goto(url=self.url)
 
-    def do_login(self, username: str, password: str):
+    def do_login(self, username: str, password: str) -> HomePage:
         self.username_field.type(username, delay=100)
         self.password_field.type(password, delay=100)
         self.login_button.click()
+        return HomePage(self.page)
