@@ -27,7 +27,20 @@ class LoginPage:
     def login_button(self) -> Locator:
         return self.page.locator("#login-button")
 
-    def open(self):
+    def type_username(self, username: str):
+        self.username_field.type(username)
+        return self
+
+    def type_password(self, password: str):
+        self.password_field.type(password)
+        return self
+
+    def click_login_button(self):
+        self.login_button.click()
+        return self
+
+
+    def open(self) -> None:
         self.page.goto(url=self.url)
 
     def do_login(self, username: str, password: str) -> HomePage:
@@ -35,3 +48,5 @@ class LoginPage:
         self.password_field.type(password, delay=100)
         self.login_button.click()
         return HomePage(self.page)
+
+

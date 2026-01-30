@@ -2,6 +2,7 @@ import os
 from random import randint
 
 from dotenv import load_dotenv
+from playwright.async_api import Page
 
 from fixtures.sausedemo import home_page
 from lesson_29.page_objects.cart_page.cart_page import CartPage
@@ -36,3 +37,16 @@ class TestSauseDemo:
             home_page.click_add_to_cart_product(place=place)
         cart_page: CartPage = home_page.cart_form.open_cart()
         assert cart_page.get_items_in_cart() == 6, f"Cart contains {cart_page.get_items_in_cart()} items, but should be 6"
+
+
+    def test_login_is_successful_2(self, login_page: LoginPage, is_firefox):
+        """Pattern builder"""
+        if is_firefox:
+            raise NotImplementedError("Firefox is not supported yet")
+        login_page.type_username(os.getenv("STANDARD_USERNAME")).type_password(os.getenv("STANDARD_USERPW")).click_login_button()
+
+
+    def test_location_is_correct(self, page_other_location: Page):
+        page_other_location.goto("https://mylocation.org/")
+        page_other_location.pause()
+

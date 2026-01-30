@@ -1,0 +1,9 @@
+[
+  {
+  "flitt_nominal_iban": "GE111111111000022222222200000",
+  "flitt_nominal_iban_currency": "GEL",
+  "merchant_iban": "GE7287368765345",
+  "merchant_rrn": "362876742",
+  "is_active": true
+  }
+]
