@@ -38,7 +38,6 @@ PySocks==1.7.1
 pytest==9.0.1
 python-dotenv==1.1.0
 pytz==2025.2
-randominfo @ file:///Users/milanstar/PycharmProjects/randominfovlad
 requests==2.32.3
 selenium==4.33.0
 setuptools==80.7.1
