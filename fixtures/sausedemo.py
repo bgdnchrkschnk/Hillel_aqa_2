@@ -2,6 +2,7 @@ import logging
 import os
 import pathlib
 
+import allure
 import pytest
 from playwright.sync_api import sync_playwright, Page, Playwright
 
@@ -54,6 +55,7 @@ def trace_per_test(request, clear_page):
     # stop tracing і збереження після тесту
     test_name = request.node.name
     context.tracing.stop(path=str(trace_path / f"{test_name}.zip"))
+    allure.attach.file(str(trace_path / f"{test_name}.zip"), name=f"{test_name}.zip")
 
 
 @pytest.fixture

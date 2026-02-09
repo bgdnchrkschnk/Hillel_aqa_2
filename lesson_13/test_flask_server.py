@@ -13,7 +13,7 @@ test_content_data = {'cars': ['Audi, VW', 'Toyota']}
 test_content_data_2 = {'bikes': ['Honda', 'Suzuki']}
 
 
-class TestContent:
+class TestFlaskContent:
 
     def test_add_content(self):
         _log.info('Checking content adding...')

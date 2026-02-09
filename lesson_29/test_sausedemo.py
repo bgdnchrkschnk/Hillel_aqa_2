@@ -1,6 +1,7 @@
 import os
 from random import randint
 
+import allure
 from dotenv import load_dotenv
 from playwright.async_api import Page
 
@@ -16,6 +17,8 @@ class TestSauseDemo:
 
     def test_login_is_successful(self, login_page: LoginPage):
         home_page: HomePage = login_page.do_login(username=os.getenv("STANDARD_USERNAME"), password=os.getenv("STANDARD_USERPW"))
+        screenshot = home_page.page.screenshot(path="screenshot.png")
+        allure.attach(screenshot, name="Screenshot before assert", attachment_type=allure.attachment_type.PNG)
         assert home_page.is_logged_in() is True , f"Login failed with username: {os.getenv('STANDARD_USERNAME')} and password: {os.getenv('STANDARD_USERPW')[:3]}****"
 
     def test_login_with_wrong_creds(self, login_page: LoginPage):

@@ -1,4 +1,6 @@
 import os
+
+import allure
 from playwright.sync_api import Page, Locator, expect
 from dotenv import load_dotenv
 
@@ -39,10 +41,11 @@ class LoginPage:
         self.login_button.click()
         return self
 
-
+    @allure.step("Open Sause Demo Store")
     def open(self) -> None:
         self.page.goto(url=self.url)
 
+    @allure.step("Login to Sause Demo Store")
     def do_login(self, username: str, password: str) -> HomePage:
         self.username_field.type(username, delay=100)
         self.password_field.type(password, delay=100)
