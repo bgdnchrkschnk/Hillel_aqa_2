@@ -24,7 +24,8 @@ pipeline {
                     python3 -m venv .venv
                     . .venv/bin/activate
                     pip install -r requirements.txt
-                    playwright install --with-deps
+                    playwright install-deps
+                    playwright install
                 '''
             }
         }
