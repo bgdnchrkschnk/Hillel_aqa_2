@@ -11,7 +11,7 @@ pipeline {
             steps {
                 sh '''
                     apt-get update
-                    apt-get install -y python3 python3-dev python3-pip python3-venv openjdk-17-jdk
+                    apt-get install -y python3 python3-dev python3-pip python3-venv default-jdk
                     rm -rf .venv
                     java -version
                     python3 --version
@@ -47,7 +47,8 @@ pipeline {
     }
 
     post {
-    always {
-        allure includeProperties: false, jdk: '', commandline: 'allure', results: [[path: 'allure-results']]
+        always {
+            allure includeProperties: false, jdk: '', commandline: 'allure', results: [[path: 'allure-results']]
+        }
     }
 }
